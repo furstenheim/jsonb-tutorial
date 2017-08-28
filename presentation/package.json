@@ -1,0 +1,17 @@
+{
+  "name": "pg-conf-eu-2017-is-jsonb-valid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Fürstenheim <furstenheim@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "reveal.js": "^3.5.0"
+  },
+  "devDependencies": {
+    "budo": "^10.0.4"
+  }
+}
