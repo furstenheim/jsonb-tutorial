@@ -9,6 +9,7 @@
   "author": "Gabriel Fürstenheim <furstenheim@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "reveal.js": "^3.5.0"
   },
   "devDependencies": {
