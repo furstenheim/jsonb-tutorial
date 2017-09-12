@@ -19,12 +19,23 @@
             <h2>Lessons Learnt Writing PostgreSQL Extensions for JSON(b)</h2>    
             <br>
             <p>Gabriel Fürstenheim</p>
-            <p><i class="fa fa-twitter icon--white"> </i>&nbsp<i class="fa fa-github icon--white"></i> furstenheim</p>   
+            <p><i class="fa fa-twitter icon&#45;&#45;white"> </i>&nbsp<i class="fa fa-github icon&#45;&#45;white"></i> furstenheim</p>
         </section>
         <section>
-            <h2>
-                 Second slide
+            <h2 >
+                 Why JSON?
             </h2>
+            <ul>
+                <li class="fragment" data-fragment-index="1">Heterogeneous fields for locations</li>
+                <br>
+                <li class="fragment" data-fragment-index="2">Saved user state</li>
+            </ul>
+            <p class="fragment current-visible" data-fragment-index="1">
+                Common attributes (address, geometry...) stored as SQL.
+            </p>
+            <p class="fragment current-visible" data-fragment-index="1">
+                Unrelated attributes (e.g. oil price for gas stations) inside a JSON field.
+            </p>
             
         </section>
     </div>
