@@ -21,9 +21,16 @@
             <p>Gabriel Fürstenheim</p>
             <p><i class="fa fa-twitter icon&#45;&#45;white"> </i>&nbsp<i class="fa fa-github icon&#45;&#45;white"></i> furstenheim</p>
         </section>
+        
+        <section>
+            <h2>Geoblink</h2>
+            <p>Analytics on Maps</p>
+            <img src="resources/geoblink_screenshot.jpg">
+        </section>
+        
         <section>
             <h2 >
-                 Why JSON?
+                 How we use JSON?
             </h2>
             <ul>
                 <li class="fragment" data-fragment-index="1">Heterogeneous fields for locations</li>
@@ -36,6 +43,27 @@
             <p class="fragment current-visible" data-fragment-index="1">
                 Unrelated attributes (e.g. oil price for gas stations) inside a JSON field.
             </p>
+        </section>
+        
+        <section>
+            <h2>
+                Warning!
+            </h2>
+            <pre><code data-trim data-noescape>
+                {
+                    "type": "object",
+                    "additionalProperties": false, 
+                    "properties": {
+                        "email": {
+                            "type": "string"
+                        },
+                        "number_of_stores": {
+                            "type": "integer"
+                        }
+                    }
+                }
+                </code></pre>
+            <p class="fragment"> You should always validate data in the DB</p>
             
         </section>
     </div>

@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "reveal.js": "^3.5.0"
+    "reveal.js": "git+https://git@github.com/furstenheim/reveal.js.git#470999a3e8f1d54ca2169ee5dcf047d623a05981"
   },
   "devDependencies": {
     "budo": "^10.0.4"
