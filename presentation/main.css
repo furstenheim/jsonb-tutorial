@@ -1,3 +1,15 @@
 .icon--white {
     color: white;
 }
+.reveal .slides section .fragment.current-disappear {
+    visibility: inherit;
+    opacity: inherit;
+}
+.reveal .slides section .fragment.current-disappear.current-fragment {
+    display: none;
+}
+
+.reveal pre {
+    /* Hack because code is not aligned*/
+    box-shadow: none; 
+}

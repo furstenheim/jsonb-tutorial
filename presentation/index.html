@@ -49,7 +49,16 @@
             <h2>
                 Warning!
             </h2>
-            <pre><code data-trim data-noescape>
+            <div class="fragment current-disappear" data-fragment-index="3">
+                <p class="fragment fade-in" data-fragment-index="1">
+                    Always validate data at the DB.
+                </p>
+                <p class="fragment fade-in" data-fragment-index="2">
+                    Use JSON Schema
+                </p>
+            </div>
+            <pre class="fragment fade-in" data-fragment-index="3">
+                <code data-trim data-noescape>
                 {
                     "type": "object",
                     "additionalProperties": false, 
@@ -63,8 +72,6 @@
                     }
                 }
                 </code></pre>
-            <p class="fragment"> You should always validate data in the DB</p>
-            
         </section>
     </div>
 </div>
