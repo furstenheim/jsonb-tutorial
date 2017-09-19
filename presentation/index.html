@@ -23,6 +23,96 @@
         </section>
         
         <section>
+            <h2>JSON in Postgres</h2>
+            <p> Easy to access information</p>
+            <p> Hard to manipulate</p>
+        </section>
+        <section>
+            <h3>Selection of property</h3>
+            <pre>
+                <code data-trim data-noescape>
+                {"a": 1, "b": 2}
+                > 2
+                </code></pre>
+            <pre>
+                <code data-trim data-noescape>
+                {"a": 1, "b": 2}->'b'
+
+                </code></pre>
+        </section>
+        <section>
+            <h3>Property containment</h3>
+            <pre>
+                <code data-trim data-noescape>
+                {"a": 1, "b": 2}
+                > t
+                </code></pre>
+            <pre>
+                <code data-trim data-noescape>
+                {"a": 1, "b": 2} ? 'b'
+
+                </code></pre>
+
+
+        </section>
+
+        <section>
+            <h3>Sum of jsons</h3>
+            <pre>
+                <code data-trim data-noescape>
+                {"a": 1, "b": 2}
+                {"a": 3, "b": 4}
+                > {"a": 4, "b": 6}
+                </code></pre>
+            <pre>
+                <code data-trim data-noescape>
+                SELECT jsonb_object_agg(key, val)
+                FROM (
+                    SELECT key, SUM(value::numeric) val
+                    FROM test_table t, jsonb_each_text(info)
+                    GROUP BY key
+                 )s;   
+
+                </code></pre>
+        </section>
+
+        <section>
+            <h3>Nested sum of jsons</h3>
+            <pre>
+                <code data-trim data-noescape>
+                {"a": {"c": 4}, "b": {"d": 4}}
+                {"a": {"c": 3}, "b": {"d": 2}}
+                > {"a": {"c": 7}, "b": {"d": 6}}
+                </code></pre>
+            <p>???</p>
+        </section>
+        <section>
+            <h2>
+                JSON Schema
+            </h2>
+            <pre>
+                <code data-trim data-noescape>
+                {
+                    "type": "object",
+                    "additionalProperties": false, 
+                    "properties": {
+                        "email": {
+                            "type": "string"
+                        },
+                        "number_of_stores": {
+                            "type": "integer"
+                        }
+                    }
+                }
+                </code></pre>
+        </section>
+
+        <section>
+            <h2>Starting a PostgreSQL extension</h2>
+            <p><a href="http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/">Nice intro to writing PostgreSQL Extensions</a></p>
+            <p><a>Barebone example</a></p>
+        </section>
+        <section>
             <h2>Geoblink</h2>
             <p>Analytics on Maps</p>
             <img src="resources/geoblink_screenshot.jpg">
@@ -45,34 +135,7 @@
             </p>
         </section>
         
-        <section>
-            <h2>
-                Warning!
-            </h2>
-            <div class="fragment current-disappear" data-fragment-index="3">
-                <p class="fragment fade-in" data-fragment-index="1">
-                    Always validate data at the DB.
-                </p>
-                <p class="fragment fade-in" data-fragment-index="2">
-                    Use JSON Schema
-                </p>
-            </div>
-            <pre class="fragment fade-in" data-fragment-index="3">
-                <code data-trim data-noescape>
-                {
-                    "type": "object",
-                    "additionalProperties": false, 
-                    "properties": {
-                        "email": {
-                            "type": "string"
-                        },
-                        "number_of_stores": {
-                            "type": "integer"
-                        }
-                    }
-                }
-                </code></pre>
-        </section>
+
     </div>
 </div>
 <script src="bundle.js"></script>
