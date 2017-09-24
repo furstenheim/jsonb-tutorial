@@ -26,8 +26,8 @@ Reveal.initialize({
 Reveal.addEventListener('ready', function () {
   Reveal.slide(8)
   jsPlumb.ready(function () {
-   var common = {
-      endpoint: 'Dot'
+    var common = {
+      endpoint: 'Blank'
     }
 
     jsPlumb.connect({
@@ -57,7 +57,7 @@ Reveal.addEventListener('ready', function () {
     jsPlumb.connect({
       source: 'jsonb-diagram__jsonb-iterator-next',
       target: 'jsonb-diagram__jsonb-iterator-token',
-      connector: ['Bezier'],
+      connector: ['Bezier', {curviness: 300}],
       anchor: ['Bottom', 'Right'],
       overlays: [['Arrow', { width: 12, length: 12, location: 0.67 }] ]
     }, common)
@@ -89,7 +89,7 @@ Reveal.addEventListener('ready', function () {
     jsPlumb.connect({
       source: 'jsonb-diagram__jsonb-value',
       target: 'jsonb-diagram__push-jsonb-value',
-      connector: ['Bezier', {stub: 10}],
+      connector: ['Bezier', {curviness: 400}],
       anchor: ['Left', 'Bottom'],
       overlays: [['Arrow', { width: 12, length: 12, location: 0.67 }] ]
     }, common)

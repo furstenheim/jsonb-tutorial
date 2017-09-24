@@ -15,7 +15,6 @@
 }
 div .jsonb-diagram {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -29,6 +28,13 @@ div .jsonb-diagram__label {
 div .jsonb-diagram__row {
     display: flex;
     justify-content: space-between;
+}
+
+div .jsonb-diagram__column {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
 }
 div .jsonb-diagram__item {
     border: 5px solid red;
