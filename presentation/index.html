@@ -106,20 +106,51 @@
                 }
                 </code></pre>
         </section>
-
-        <section>
-            <div id="diagramContainer">
-                <div id="item_left" class="item"></div>
-                <div id="item_right" class="item" style="margin-left:50px;"></div>
-            </div>
-        </section>
+        
         <section>
             <h2>Starting a PostgreSQL extension</h2>
             <p><a href="http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/">Nice intro to writing PostgreSQL Extensions</a></p>
             <p><a>Barebone example</a></p>
         </section>
+
         <section>
-            <h2>Geoblink</h2>
+            <div id="diagramContainer" class="jsonb-diagram">
+
+                
+                <div class="jsonb-diagram__row">
+                    <div id="jsonb-diagram__jsonb" class="jsonb-diagram__item">
+                        <span>Jsonb</span>
+                    </div>
+                    <div id="jsonb-diagram__jsonb-iterator" class="jsonb-diagram__item" style="margin-left:50px">
+                        <span>JsonbIterator</span>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="jsonb-diagram__row">
+                    <div id="jsonb-diagram__push-jsonb-value" class="jsonb-diagram__label">
+                        <span>pushJsonbValue</span>
+                    </div>
+                    <div id="jsonb-diagram__jsonb-iterator-next" class="jsonb-diagram__label">
+                        <span>JsonbIteratorNext</span>
+                    </div>
+                    
+                </div>
+                <br>
+                <br>
+                <div class="jsonb-diagram__row">
+                    <div id="jsonb-diagram__jsonb-iterator-token" class="jsonb-diagram__item">
+                        <span>JsonbIteratorToken</span>
+                    </div>
+                    <div id="jsonb-diagram__jsonb-value" class="jsonb-diagram__item" style="margin-left:50px">
+                        <span>JsonbValue</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Geoblink</h2> 
             <p>Analytics on Maps</p>
             <img src="resources/geoblink_screenshot.jpg">
         </section>

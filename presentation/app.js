@@ -24,17 +24,91 @@ Reveal.initialize({
   ]
 })
 Reveal.addEventListener('ready', function () {
-  Reveal.slide(7)
+  Reveal.slide(8)
   jsPlumb.ready(function () {
-    var common = {
-      connector: ["Straight"],
-      anchor: ["Left", "Right"],
-      endpoint:"Dot"
+   var common = {
+      endpoint: 'Dot'
     }
+
     jsPlumb.connect({
-      source:"item_left",
-      target:"item_right",
-      overlays:[ ["Arrow" , { width:12, length:12, location:0.67 }] ]
+      source: 'jsonb-diagram__jsonb',
+      target: 'jsonb-diagram__jsonb-iterator',
+      anchor: ['Left', 'Right'],
+      connector: ['Straight'],
+      overlays: [[
+        'Label',
+        {
+          label: 'JsonbIteratorInit',
+          location: 0.30,
+          cssClass: 'jsonb-diagram__label'
+        }
+      ], ['Arrow', { width: 12, length: 12, location: 0.67 }]]
     }, common)
+
+    // jsonb iterator next
+    jsPlumb.connect({
+      source: 'jsonb-diagram__jsonb-iterator',
+      target: 'jsonb-diagram__jsonb-iterator-next',
+      connector: ['Straight'],
+      anchor: ['Bottom', 'Top'],
+      overlays: [['Arrow', { width: 12, length: 12, location: 0.67 }] ]
+    }, common)
+    
+    jsPlumb.connect({
+      source: 'jsonb-diagram__jsonb-iterator-next',
+      target: 'jsonb-diagram__jsonb-iterator-token',
+      connector: ['Bezier'],
+      anchor: ['Bottom', 'Right'],
+      overlays: [['Arrow', { width: 12, length: 12, location: 0.67 }] ]
+    }, common)
+    jsPlumb.connect({
+      source: 'jsonb-diagram__jsonb-iterator-next',
+      target: 'jsonb-diagram__jsonb-value',
+      connector: ['Straight'],
+      anchor: ['Bottom', 'Top'],
+      overlays: [['Arrow', { width: 12, length: 12, location: 0.67 }] ]
+    }, common)
+
+    // end jsonb iterator next
+    jsPlumb.connect({
+      source: 'jsonb-diagram__jsonb-value',
+      target: 'jsonb-diagram__jsonb',
+      connector: ['Bezier'],
+      anchor: ['Left', 'Bottom'],
+      overlays: [[
+        'Label',
+        {
+          label: 'JsonbValueToJsonb',
+          location: 0.50,
+          cssClass: 'jsonb-diagram__label'
+        }
+      ], ['Arrow', { width: 12, length: 12, location: 0.67 }] ]
+    }, common)
+    
+    // pushjsonbValue
+    jsPlumb.connect({
+      source: 'jsonb-diagram__jsonb-value',
+      target: 'jsonb-diagram__push-jsonb-value',
+      connector: ['Bezier', {stub: 10}],
+      anchor: ['Left', 'Bottom'],
+      overlays: [['Arrow', { width: 12, length: 12, location: 0.67 }] ]
+    }, common)
+
+    jsPlumb.connect({
+      source: 'jsonb-diagram__jsonb-iterator-token',
+      target: 'jsonb-diagram__push-jsonb-value',
+      connector: ['Straight'],
+      anchor: ['Top', 'Bottom'],
+      overlays: [['Arrow', { width: 12, length: 12, location: 0.67 }] ]
+    }, common)
+    jsPlumb.connect({
+      source: 'jsonb-diagram__push-jsonb-value',
+      target: 'jsonb-diagram__jsonb',
+      connector: ['Straight'],
+      anchor: ['Top', 'Bottom'],
+      overlays: [['Arrow', { width: 12, length: 12, location: 0.67 }] ]
+    }, common)
+    // end push jsonb value
+    Reveal.layout()
   })
 })

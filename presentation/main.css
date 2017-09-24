@@ -10,6 +10,27 @@
 }
 
 .reveal pre {
-    /* Hack because code is not aligned*/
-    box-shadow: none; 
+    /* Hack because code is not aligned */
+    box-shadow: none;
 }
+div .jsonb-diagram {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div .jsonb-diagram__label {
+    background-color: lavender;
+    padding: 10px;
+    font-size: 0.5em;
+    border-radius: 10px;
+}
+
+div .jsonb-diagram__row {
+    display: flex;
+    justify-content: space-between;
+}
+div .jsonb-diagram__item {
+    border: 5px solid red;
+}
+
