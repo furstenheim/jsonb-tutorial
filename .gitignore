@@ -7,3 +7,4 @@ script/*
 *.diffs
 *.gcda
 */regression.out
+*.gnco
