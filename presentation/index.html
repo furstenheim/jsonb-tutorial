@@ -122,9 +122,11 @@
                     </div>
                     <br>
                     <br>
+                    <br>
                     <div id="jsonb-diagram__push-jsonb-value" class="jsonb-diagram__label">
                         <span>pushJsonbValue</span>
                     </div>
+                    <br>
                     <br>
                     <br>
                     <div id="jsonb-diagram__jsonb-iterator-token" class="jsonb-diagram__item">
@@ -137,15 +139,83 @@
                     </div>
                     <br>
                     <br>
+                    <br>
                     <div id="jsonb-diagram__jsonb-iterator-next" class="jsonb-diagram__label">
                         <span>JsonbIteratorNext</span>
                     </div>
+                    <br>
                     <br>
                     <br>
                     <div id="jsonb-diagram__jsonb-value" class="jsonb-diagram__item">
                         <span>JsonbValue</span>
                     </div>
                     
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>JsonbIterator</h2>
+            <p class="fragment" data-fragment-index="1">
+                Flat iteration
+            </p>
+            <p class="fragment" data-fragment-index="2">
+                Recursive Iteration
+            </p>
+            <div class="jsonb_iteration__example fragment current-visible" data-fragment-index="1">
+                <div class="jsonb_iteration__example__item">
+                    <pre>
+                        <code data-trim data-noespace>
+                            {
+                                "a": 1,
+                                "b": {
+                                    "c": 2
+                                }
+                            }
+                        </code>
+                    </pre>    
+                </div>
+                
+                <div  class="jsonb_iteration__example__item">
+                    <pre>
+                        <code data-trim data-noespace>
+                            {
+                                "a"
+                                "1"
+                                "b"
+                                {"c": 2}
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <div class="jsonb_iteration__example fragment current-visible" data-fragment-index="2">
+                <div class="jsonb_iteration__example__item">
+                    <pre>
+                        <code data-trim data-noespace>
+                            {
+                                "a": 1,
+                                "b": {
+                                    "c": 2
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+
+                <div  class="jsonb_iteration__example__item">
+                    <pre>
+                        <code data-trim data-noespace>
+                            {
+                                "a"
+                                "1"
+                                "b"
+                                    {
+                                        "c"
+                                        2
+                                    }
+                            }
+                        </code>
+                    </pre>
                 </div>
             </div>
         </section>

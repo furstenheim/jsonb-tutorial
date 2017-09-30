@@ -63,7 +63,13 @@ void fmtIteratorToken (JsonbIteratorToken r) {
     if (r == WJB_BEGIN_OBJECT) {
         elog(INFO, "Start object");
     }
-    
+    if (r == WJB_BEGIN_ARRAY) {
+        elog(INFO, "Start array");
+    }
+    if (r == WJB_END_ARRAY) {
+        elog(INFO, "End array");
+    }
+        
     if (r == WJB_END_OBJECT) {
         elog(INFO, "End object");
     }

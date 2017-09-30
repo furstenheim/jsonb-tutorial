@@ -52,10 +52,20 @@ module.exports = function (Reveal, jsPlumb) {
       'Label',
       {
         label: 'JsonbValueToJsonb',
-        location: 0.50,
+        location: 0.65,
         cssClass: 'jsonb-diagram__label'
       }
-    ], ['Arrow', {width: 12, length: 12, location: 0.67}]]
+    ],
+    ['Arrow', {width: 12, length: 12, location: 0.85}],
+    ['Arrow', {width: 12, length: 12, location: 1 - 0.85, direction: -1}],
+    [
+      'Label',
+      {
+        label: 'findJsonbValueFromContainer',
+        location: 1 - 0.6,
+        cssClass: 'jsonb-diagram__label'
+      }
+    ]]
   }, common)
 
 // pushjsonbValue

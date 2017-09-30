@@ -40,3 +40,16 @@ div .jsonb-diagram__item {
     border: 5px solid red;
 }
 
+div .jsonb_iteration__example {
+    display: hidden;
+    justify-content: space-around;
+}
+
+div .jsonb_iteration__example.visible {
+    display: flex;
+}
+pre .jsonb_iteration__example__item {
+    flex-shrink: 0;
+    flex-grow: 1;
+    margin: 5px;
+}
