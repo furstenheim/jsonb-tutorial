@@ -24,8 +24,13 @@
         
         <section>
             <h2>JSON in Postgres</h2>
-            <p> Easy to access information</p>
-            <p> Hard to manipulate</p>
+            <ul>
+                <li> Two types JSON and JSONb</li>
+                <li> Easy to access information</li>
+                <li> Hard to manipulate</li>
+                <li> Easy to add functionality through C code</li>    
+            </ul>
+            
         </section>
         <section>
             <h3>Selection of property</h3>
@@ -163,6 +168,7 @@
             </p>
             <div class="jsonb_iteration__example fragment current-visible" data-fragment-index="1">
                 <div class="jsonb_iteration__example__item">
+                    <p>Input</p>
                     <pre>
                         <code data-trim data-noespace>
                             {
@@ -176,6 +182,7 @@
                 </div>
                 
                 <div  class="jsonb_iteration__example__item">
+                    <p>Output</p>
                     <pre>
                         <code data-trim data-noespace>
                             {
@@ -190,6 +197,7 @@
             </div>
             <div class="jsonb_iteration__example fragment current-visible" data-fragment-index="2">
                 <div class="jsonb_iteration__example__item">
+                    <p>Input</p>
                     <pre>
                         <code data-trim data-noespace>
                             {
@@ -203,6 +211,7 @@
                 </div>
 
                 <div  class="jsonb_iteration__example__item">
+                    <p>Output</p>
                     <pre>
                         <code data-trim data-noespace>
                             {
@@ -219,6 +228,15 @@
                 </div>
             </div>
         </section>
+        
+        <section>
+            <h2>Jsonb and JsonbValue</h2>
+            <ul>
+                <li>Everything is a JsonbValue: keys, values, object descriptions</li>
+                <li>findJsonbValueFromContainer</li>
+                <li>JsonbValueToJsonb</li>
+            </ul>
+            </section>
         
         <section>
             <h2>Geoblink</h2> 

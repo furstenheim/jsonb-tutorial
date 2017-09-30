@@ -19,12 +19,7 @@ INFO:  Iterating
  
 (1 row)
 
-SELECT pg_conf_eu('{"a": {"b": 4, "d": 5}}', '{}');
-INFO:  Iterating
-INFO:  Iterating
-INFO:  Iterating
-INFO:  Iterating
-INFO:  Iterating
+SELECT pg_conf_eu('{"a": {"b": "p", "d": 5}}', '{}');
 INFO:  Iterating
 INFO:  Iterating
 INFO:  Iterating

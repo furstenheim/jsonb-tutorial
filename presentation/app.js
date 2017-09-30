@@ -30,12 +30,15 @@ Reveal.addEventListener('ready', function () {
       if (event.indexh === 8) {
         drawDiagram(Reveal, jsPlumb)
       }
+      if (event.indexh === 9) {
+        Reveal.layout()
+      }
       console.log(event)
     })
   })
 })
 Reveal.addEventListener('ready', function () {
-  Reveal.slide(0)
+  Reveal.slide(8)
   jsPlumb.ready(function () {
     
   })

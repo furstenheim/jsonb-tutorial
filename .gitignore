@@ -8,3 +8,4 @@ script/*
 *.gcda
 */regression.out
 *.gnco
+*.gcno

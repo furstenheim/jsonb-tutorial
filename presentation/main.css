@@ -41,13 +41,16 @@ div .jsonb-diagram__item {
 }
 
 div .jsonb_iteration__example {
-    display: hidden;
     justify-content: space-around;
-}
-
-div .jsonb_iteration__example.visible {
     display: flex;
 }
+div .jsonb_iteration__example.fragment.current-visible.visible:not(.current-fragment) {
+    display: none;
+    height: 0px;
+    line-height: 0px;
+    font-size: 0px;
+}
+
 pre .jsonb_iteration__example__item {
     flex-shrink: 0;
     flex-grow: 1;

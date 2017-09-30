@@ -17,16 +17,17 @@ pg_conf_eu(PG_FUNCTION_ARGS)
  JsonbValue v1;
  Jsonb *jb1 = PG_GETARG_JSONB(0);
  Jsonb *jb2 = PG_GETARG_JSONB(1);
+ bool isFlatIteration = true;
  
  if (!JB_ROOT_IS_OBJECT(jb1))
     ereport(ERROR, (errcode(ERRCODE_INVALID_PARAMETER_VALUE), errmsg("Iterator is not an object")));
  
  it1 = JsonbIteratorInit(&jb1->root);
- r1 = JsonbIteratorNext(&it1, &v1, false);
+ r1 = JsonbIteratorNext(&it1, &v1, isFlatIteration);
  
  while (r1 != WJB_DONE) {
    elog(INFO, "Iterating");
-   r1 = JsonbIteratorNext(&it1, &v1, false);
+   r1 = JsonbIteratorNext(&it1, &v1, isFlatIteration);
  }
  
     
@@ -40,7 +41,7 @@ void fmtJsonbValue (JsonbValue v) {
     }
     
     if (v.type == jbvString) {
-        elog(INFO, "Value is string");
+        elog(INFO, "Value is string  %*.*s", v.val.string.len, v.val.string.len, v.val.string.val);
     }
     
     if (v.type == jbvBinary) {
@@ -48,7 +49,7 @@ void fmtJsonbValue (JsonbValue v) {
     }
     
     if (v.type == jbvObject) {
-            elog(INFO, "Value is object descriptor");
+            elog(INFO, "Value is descriptor of object with %d properties", v.val.object.nPairs);
     }
     if (v.type == jbvArray) {
             elog(INFO, "Value is array descriptor");
