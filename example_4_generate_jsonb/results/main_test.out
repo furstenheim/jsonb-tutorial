@@ -1,0 +1,7 @@
+CREATE EXTENSION pg_conf_eu;
+SELECT pg_conf_eu('{}', '{}');
+ pg_conf_eu  
+-------------
+ {"a": "d3"}
+(1 row)
+
