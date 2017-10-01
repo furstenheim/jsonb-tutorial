@@ -6,6 +6,8 @@
 PG_MODULE_MAGIC;
 static JsonbValue generate_string_jsonb_value (const char * key);
 static Jsonb * createStaticJsonb ();
+static Jsonb * copyJsonb (Jsonb * jb);
+
 
 PG_FUNCTION_INFO_V1(pg_conf_eu);
 Datum
@@ -15,7 +17,7 @@ pg_conf_eu(PG_FUNCTION_ARGS)
  Jsonb *jb2 = PG_GETARG_JSONB(1);
  Jsonb * result;
 
- result = createStaticJsonb();
+ result = copyJsonb(jb1);
  PG_RETURN_JSONB(result);
 }
 
@@ -35,6 +37,27 @@ static Jsonb * createStaticJsonb () {
     return JsonbValueToJsonb(result);
 }
 
+static Jsonb * copyJsonb (Jsonb * jb) {
+    JsonbIteratorToken r;
+    JsonbValue v;
+    JsonbValue * result;
+    JsonbParseState *state = NULL;
+    JsonbIterator * it;
+    
+    it = JsonbIteratorInit(&jb->root); 
+    r = JsonbIteratorNext(&it, &v, false);
+            
+    while (r != WJB_DONE) {
+        // Achtung, if WJB_BEGIN_OBJECT or WJB_END_OBJECT, then *JsonbValue must be null in push
+        if (r == WJB_BEGIN_OBJECT || r == WJB_END_OBJECT) {
+            result = pushJsonbValue(&state, r, NULL);
+        } else {
+            result = pushJsonbValue(&state, r, &v);
+        }
+        r = JsonbIteratorNext(&it, &v, false);
+    }
+    return JsonbValueToJsonb(result);
+}
 
 static JsonbValue generate_string_jsonb_value (const char * key) {
     JsonbValue propertyKey;

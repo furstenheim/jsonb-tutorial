@@ -1,7 +1,19 @@
 CREATE EXTENSION pg_conf_eu;
 SELECT pg_conf_eu('{}', '{}');
- pg_conf_eu  
--------------
- {"a": "d3"}
+ pg_conf_eu 
+------------
+ {}
+(1 row)
+
+SELECT pg_conf_eu('{"a": 2}', '{}');
+ pg_conf_eu 
+------------
+ {"a": 2}
+(1 row)
+
+SELECT pg_conf_eu('{"a": {"b": "c"}, "e": 4}', '{}');
+        pg_conf_eu         
+---------------------------
+ {"a": {"b": "c"}, "e": 4}
 (1 row)
 
