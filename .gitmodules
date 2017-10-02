@@ -1,0 +1,3 @@
+[submodule "example_6_jsonb_deep_sum"]
+	path = example_6_jsonb_deep_sum
+	url = https://github.com/furstenheim/jsonb_deep_sum.git
