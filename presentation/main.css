@@ -19,7 +19,7 @@ div .jsonb-diagram {
 }
 
 div .jsonb-diagram__label {
-    background-color: lavender;
+    background-color: Snow;
     padding: 10px;
     font-size: 0.5em;
     border-radius: 10px;
@@ -37,18 +37,18 @@ div .jsonb-diagram__column {
     flex-direction: column;
 }
 div .jsonb-diagram__item {
-    border: 5px solid red;
+    background: darkblue;
+    border: 5px solid RoyalBlue;
+    border-radius: 15px;
+}
+div .jsonb-diagram__item span{
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 div .jsonb_iteration__example {
     justify-content: space-around;
     display: flex;
-}
-div .jsonb_iteration__example.fragment.current-visible.visible:not(.current-fragment) {
-    display: none;
-    height: 0px;
-    line-height: 0px;
-    font-size: 0px;
 }
 
 pre .jsonb_iteration__example__item {

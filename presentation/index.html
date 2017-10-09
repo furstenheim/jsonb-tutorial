@@ -23,53 +23,107 @@
         </section>
         
         <section>
+            <h2>
+                A bit about me               
+            </h2>
+            <ul>
+                <li>
+                    Mathematician
+                </li>
+                <li>
+                    Fullstack backend @Geoblink
+                </li>
+                <li>
+                    Main language is Node.js
+                </li>
+            </ul>
+        </section>
+        
+        <section>
             <h2>JSON in Postgres</h2>
             <ul>
-                <li> Two types JSON and JSONb</li>
-                <li> Easy to access information</li>
-                <li> Hard to manipulate</li>
-                <li> Easy to add functionality through C code</li>    
+                <li class="fragment"> Two types JSON and JSONb</li>
+                <li class="fragment"> Easy to access information</li>
+                <li class="fragment"> Hard to manipulate</li>
+                <li class="fragment"> Easy to add functionality through C code</li>    
             </ul>
             
         </section>
         <section>
-            <h3>Selection of property</h3>
-            <pre>
+            <section>
+                <h3>Selection of property</h3>
+
+                <p>Input</p>
+                <pre>
                 <code data-trim data-noescape>
                 {"a": 1, "b": 2}
-                > 2
                 </code></pre>
-            <pre>
+                    
+                    
+                <p>Output</p>
+                <pre>
+                <code data-trim data-noescape>
+                2
+                </code></pre>
+            </section>
+            <section>
+                <p>Solution</p>
+                 <pre>
+                    
                 <code data-trim data-noescape>
                 {"a": 1, "b": 2}->'b'
 
                 </code></pre>
+            </section>
         </section>
+        
         <section>
-            <h3>Property containment</h3>
-            <pre>
+            <section>
+                <h3>Property containment</h3>
+                <p>Input</p>
+                <pre>
                 <code data-trim data-noescape>
                 {"a": 1, "b": 2}
-                > t
                 </code></pre>
-            <pre>
+                <p>Output</p>
+                <pre>
+                <code data-trim data-noescape>
+                t
+                </code></pre>
+
+            </section>
+            <section>
+                <p>Solution</p>
+                <pre>
                 <code data-trim data-noescape>
                 {"a": 1, "b": 2} ? 'b'
 
                 </code></pre>
-
+            </section>
+            
 
         </section>
 
         <section>
-            <h3>Sum of jsons</h3>
-            <pre>
+            <section>
+                <h3>Sum of jsons</h3>
+                <p>Input</p>
+                <pre>
                 <code data-trim data-noescape>
                 {"a": 1, "b": 2}
                 {"a": 3, "b": 4}
-                > {"a": 4, "b": 6}
                 </code></pre>
-            <pre>
+                <p>
+                    Output
+                </p>
+                <pre>
+                <code data-trim data-noescape>
+                    {"a": 4, "b": 6}
+                </code></pre>
+            </section>
+            <section>
+                <p>Solution</p>
+                <pre>
                 <code data-trim data-noescape>
                 SELECT jsonb_object_agg(key, val)
                 FROM (
@@ -79,17 +133,29 @@
                  )s;   
 
                 </code></pre>
+                
+            </section>
         </section>
 
         <section>
-            <h3>Nested sum of jsons</h3>
-            <pre>
+            <section>
+                <h3>Nested sum of jsons</h3>
+                <p>Input</p>
+                <pre>
                 <code data-trim data-noescape>
                 {"a": {"c": 4}, "b": {"d": 4}}
                 {"a": {"c": 3}, "b": {"d": 2}}
-                > {"a": {"c": 7}, "b": {"d": 6}}
                 </code></pre>
-            <p>???</p>
+                <p>Output</p>
+                <pre>
+                <code data-trim data-noescape>
+                  {"a": {"c": 7}, "b": {"d": 6}}
+                </code></pre>
+            </section>
+            <section>
+                <p>Solution</p>
+                <p>????</p>    
+            </section>
         </section>
         <section>
             <h2>
@@ -97,25 +163,25 @@
             </h2>
             <pre>
                 <code data-trim data-noescape>
-                {
-                    "type": "object",
-                    "additionalProperties": false, 
-                    "properties": {
-                        "email": {
-                            "type": "string"
-                        },
-                        "number_of_stores": {
-                            "type": "integer"
+                    {
+                        "type": "object",
+                        "additionalProperties": false, 
+                        "properties": {
+                            "email": {
+                                "type": "string"
+                            },
+                            "number_of_stores": {
+                                "type": "integer"
+                            }
                         }
                     }
-                }
                 </code></pre>
         </section>
         
         <section>
             <h2>Starting a PostgreSQL extension</h2>
             <p><a href="http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/">Nice intro to writing PostgreSQL Extensions</a></p>
-            <p><a>Barebone example</a></p>
+            <p><a href="https://github.com/furstenheim/pgconfeu2017-is-jsonb-valid-presentation/blob/master/example_1_barebone">Barebone example</a></p>
         </section>
 
         <section>
@@ -159,17 +225,25 @@
             </div>
         </section>
         <section>
-            <h2>JsonbIterator</h2>
-            <p class="fragment" data-fragment-index="1">
-                Flat iteration
-            </p>
-            <p class="fragment" data-fragment-index="2">
-                Recursive Iteration
-            </p>
-            <div class="jsonb_iteration__example fragment current-visible" data-fragment-index="1">
-                <div class="jsonb_iteration__example__item">
-                    <p>Input</p>
-                    <pre>
+
+            <section>
+                <h2>JsonbIterator</h2>
+                <p class="fragment">
+                    Flat iteration
+                </p>
+                <p class="fragment">
+                    Recursive Iteration
+                </p>
+            </section>
+
+            <section>
+                <p >
+                    Flat iteration
+                </p>
+                <div class="jsonb_iteration__example" >
+                    <div class="jsonb_iteration__example__item">
+                        <p>Input</p>
+                        <pre>
                         <code data-trim data-noespace>
                             {
                                 "a": 1,
@@ -178,12 +252,12 @@
                                 }
                             }
                         </code>
-                    </pre>    
-                </div>
-                
-                <div  class="jsonb_iteration__example__item">
-                    <p>Output</p>
-                    <pre>
+                    </pre>
+                    </div>
+
+                    <div  class="jsonb_iteration__example__item">
+                        <p>Output</p>
+                        <pre>
                         <code data-trim data-noespace>
                             {
                                 "a"
@@ -193,12 +267,17 @@
                             }
                         </code>
                     </pre>
+                    </div>
                 </div>
-            </div>
-            <div class="jsonb_iteration__example fragment current-visible" data-fragment-index="2">
-                <div class="jsonb_iteration__example__item">
-                    <p>Input</p>
-                    <pre>
+            </section>
+            <section>
+                <p >
+                    Recursive Iteration
+                </p>
+                <div class="jsonb_iteration__example">
+                    <div class="jsonb_iteration__example__item">
+                        <p>Input</p>
+                        <pre>
                         <code data-trim data-noespace>
                             {
                                 "a": 1,
@@ -208,11 +287,11 @@
                             }
                         </code>
                     </pre>
-                </div>
+                    </div>
 
-                <div  class="jsonb_iteration__example__item">
-                    <p>Output</p>
-                    <pre>
+                    <div  class="jsonb_iteration__example__item">
+                        <p>Output</p>
+                        <pre>
                         <code data-trim data-noespace>
                             {
                                 "a"
@@ -225,70 +304,78 @@
                             }
                         </code>
                     </pre>
+                    </div>
                 </div>
-            </div>
+            </section>
+            
         </section>
         
         <section>
             <h2>Jsonb and JsonbValue</h2>
             <ul>
-                <li>Everything is a JsonbValue: keys, values, object descriptions</li>
-                <li>findJsonbValueFromContainer</li>
-                <li>JsonbValueToJsonb</li>
+                <li class="fragment">Everything is a JsonbValue: keys, values, object descriptions</li>
+                <li class="fragment">findJsonbValueFromContainer</li>
+                <li class="fragment">JsonbValueToJsonb</li>
             </ul>
-        </section> 
+        </section>
         <section>
             <h2>Building a JSONb</h2>
             <ul>
-                <li>Same order as JsonbIterator</li>
-                <li>pushJsonbValue</li>
+                <li class="fragment">Same order as JsonbIterator</li>
+                <li class="fragment">pushJsonbValue</li>
             </ul>
         </section>
         
         <section>
             <h2>Naïve Implementation</h2>
             <ul>
-                <li>Iterate over first object</li>
-                <li>Get object from second object</li>
-                <li>Push sum to Generator</li>
+                <li class="fragment">Iterate over first object</li>
+                <li class="fragment">Get object from second object</li>
+                <li class="fragment">Push sum to Generator</li>
             </ul>
         </section>
 
         <section>
             <h2>Cons</h2>
             <ul>
-                <li>Problems when keys are not the same</li>
-                <li>Not optimal</li>
+                <li class="fragment">Problems when keys are not the same</li>
+                <li class="fragment">Not optimal</li>
             </ul>
         </section>
         <section>
             <h2>Recursive sort-merge join</h2>
-            <p>Keys in JSONb are sorted on parsing</p>
-            <p>Traverse the JSONs simultaneously</p>
-            <p>O(#keys)</p>
+            <ul>
+                <li class="fragment">Keys in JSONb are sorted on parsing</li>
+                <li class="fragment">Traverse the JSONs simultaneously</li>
+                <li class="fragment">O(#keys)</li>
+            </ul>
         </section>
+
         <section>
-            <h2>Geoblink</h2> 
-            <p>Analytics on Maps</p>
-            <img src="resources/geoblink_screenshot.jpg">
+            <h2 >
+                Resources
+            </h2>
+            <ul>
+                <li>
+                    <a href="http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/">big-elephants.com/2015-10/writing-postgres-extensions-part-i/</a>
+                </li>
+                <li>
+                    <a href="https://github.com/postgres/postgres/search?utf8=%E2%9C%93&q=jsonb&type=">github.com/postgres/postgres</a>
+                </li>
+                <li>
+                    <a href="https://github.com/furstenheim/pgconfeu2017-is-jsonb-valid-presentation">github.com/furstenheim/pgconfeu2017-is-jsonb-valid-presentation</a>
+                </li>
+            </ul>
+        </section>
+        
+        <section data-background="resources/json.gif">
+            <h2>Don't fear the JSON</h2> 
         </section>
         
         <section>
-            <h2 >
-                 How we use JSON?
-            </h2>
-            <ul>
-                <li class="fragment" data-fragment-index="1">Heterogeneous fields for locations</li>
-                <br>
-                <li class="fragment" data-fragment-index="2">Saved user state</li>
-            </ul>
-            <p class="fragment current-visible" data-fragment-index="1">
-                Common attributes (address, geometry...) stored as SQL.
-            </p>
-            <p class="fragment current-visible" data-fragment-index="1">
-                Unrelated attributes (e.g. oil price for gas stations) inside a JSON field.
-            </p>
+            <h1>Thank you!!</h1>
         </section>
+        
         
 
     </div>
