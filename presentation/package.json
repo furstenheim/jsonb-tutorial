@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "budo app.js:bundle.js --live --open",
-    "build": "browserify app.js -o bundle.js"
+    "build": "browserify app.js -o bundle.js && node publish.js"
   },
   "author": "Gabriel Fürstenheim <furstenheim@gmail.com>",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "reveal.js": "git+https://git@github.com/furstenheim/reveal.js.git#470999a3e8f1d54ca2169ee5dcf047d623a05981"
   },
   "devDependencies": {
-    "budo": "^10.0.4"
+    "budo": "^10.0.4",
+    "gh-pages": "^1.0.0"
   }
 }
