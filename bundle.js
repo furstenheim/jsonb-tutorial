@@ -25,31 +25,94 @@ Reveal.initialize({
     }
   ]
 })
-Reveal.addEventListener('ready', function () {
-  jsPlumb.ready(function () {
-    Reveal.addEventListener('slidechanged', function (event) {
-      if (event.indexh === 8) {
-        drawDiagram(Reveal, jsPlumb)
-      }
-      if (event.indexh === 9) {
-        Reveal.layout()
-      }
-      console.log(event)
-    })
-  })
+
+Reveal.addEventListener('fragmentshown', function (event) {
+  var jsonbDiagram = event.fragment.getAttribute('jsonb-diagram')
+  if (jsonbDiagram) {
+    document.documentElement.style.setProperty('--jsonb-diagram__push-jsonb-value', 0)
+    document.documentElement.style.setProperty('--jsonb-diagram__jsonb-iterator-next', 0)
+  }
+  if (jsonbDiagram === 'connectJsonbJsonbIterator') {
+    drawDiagram.connectJsonbJsonbIterator(Reveal, jsPlumb)
+  }
+
+  if (jsonbDiagram === 'connectJsonbIteratorNext') {
+    document.documentElement.style.setProperty('--jsonb-diagram__jsonb-iterator-next', 1)
+    drawDiagram.connectJsonbIteratorNext(Reveal, jsPlumb)
+  }
+  if (jsonbDiagram === 'connectJsonbValue2jsonb') {
+    drawDiagram.connectJsonbValue2jsonb(Reveal, jsPlumb)
+  }
+  if (jsonbDiagram === 'pushJsonbValue') {
+    document.documentElement.style.setProperty('--jsonb-diagram__push-jsonb-value', 1)
+    drawDiagram.pushJsonbValue(Reveal, jsPlumb)
+  }
+  if (jsonbDiagram === 'drawAll') {
+    document.documentElement.style.setProperty('--jsonb-diagram__push-jsonb-value', 1)
+    document.documentElement.style.setProperty('--jsonb-diagram__jsonb-iterator-next', 1)
+    drawDiagram.drawDiagram(Reveal, jsPlumb)
+  }
 })
-Reveal.addEventListener('ready', function () {
-  jsPlumb.ready(function () {
-  })
+
+Reveal.addEventListener('fragmenthidden', function (event) {
+  var jsonbDiagram = event.fragment.getAttribute('jsonb-diagram')
+  if (jsonbDiagram) {
+    document.documentElement.style.setProperty('--jsonb-diagram__push-jsonb-value', 0)
+    document.documentElement.style.setProperty('--jsonb-diagram__jsonb-iterator-next', 0)
+  }
+  if (jsonbDiagram === 'connectJsonbJsonbIterator') {
+    drawDiagram.connectJsonbJsonbIterator(Reveal, jsPlumb)
+  }
+
+  if (jsonbDiagram === 'connectJsonbIteratorNext') {
+    document.documentElement.style.setProperty('--jsonb-diagram__jsonb-iterator-next', 1)
+    drawDiagram.connectJsonbIteratorNext(Reveal, jsPlumb)
+  }
+  if (jsonbDiagram === 'connectJsonbValue2jsonb') {
+    drawDiagram.connectJsonbValue2jsonb(Reveal, jsPlumb)
+  }
+  if (jsonbDiagram === 'pushJsonbValue') {
+    document.documentElement.style.setProperty('--jsonb-diagram__push-jsonb-value', 1)
+    drawDiagram.pushJsonbValue(Reveal, jsPlumb)
+  }
+  if (jsonbDiagram === 'drawAll') {
+    document.documentElement.style.setProperty('--jsonb-diagram__push-jsonb-value', 1)
+    document.documentElement.style.setProperty('--jsonb-diagram__jsonb-iterator-next', 1)
+    drawDiagram.drawDiagram(Reveal, jsPlumb)
+  }
+})
+
+Reveal.addEventListener('slidechanged', function (event) {
+  console.log(event)
+  if (event.previousSlide.getAttribute('jsonb-diagram')) {
+    drawDiagram.clean(Reveal, jsPlumb)
+    document.documentElement.style.setProperty('--jsonb-diagram__push-jsonb-value', 0)
+    document.documentElement.style.setProperty('--jsonb-diagram__jsonb-iterator-next', 0)
+  }
 })
 
 },{"./draw-diagram":2,"jsplumb":3,"reveal.js":4,"reveal.js/lib/js/head.min.js":5,"reveal.js/plugin/highlight/highlight-origin.js":6,"reveal.js/plugin/highlight/highlight.js":7}],2:[function(require,module,exports){
-module.exports = function (Reveal, jsPlumb) {
-  var common = {
-    endpoint: 'Blank'
+module.exports = {
+  connectJsonbJsonbIterator,
+  connectJsonbIteratorNext,
+  connectJsonbValue2jsonb,
+  pushJsonbValue,
+  drawDiagram,
+  clean
+}
+var connections = []
+var common = {
+  endpoint: 'Blank'
+}
+function clean (Reval, jsPlumb) {
+  while (connections.length) {
+    jsPlumb.deleteConnection(connections.pop())
   }
+}
 
-  jsPlumb.connect({
+function connectJsonbJsonbIterator (Reveal, jsPlumb) {
+  clean(Reveal, jsPlumb)
+  var c1 = jsPlumb.connect({
     source: 'jsonb-diagram__jsonb',
     target: 'jsonb-diagram__jsonb-iterator',
     anchor: ['Left', 'Right'],
@@ -63,9 +126,12 @@ module.exports = function (Reveal, jsPlumb) {
       }
     ], ['Arrow', {width: 12, length: 12, location: 0.67}]]
   }, common)
+  connections.push(c1)
+}
 
-// jsonb iterator next
-  jsPlumb.connect({
+function connectJsonbIteratorNext (Reveal, jsPlumb) {
+  clean(Reveal, jsPlumb)
+  const c1 = jsPlumb.connect({
     source: 'jsonb-diagram__jsonb-iterator',
     target: 'jsonb-diagram__jsonb-iterator-next',
     connector: ['Straight'],
@@ -73,23 +139,26 @@ module.exports = function (Reveal, jsPlumb) {
     overlays: [['Arrow', {width: 12, length: 12, location: 0.67}]]
   }, common)
 
-  jsPlumb.connect({
+  const c2 = jsPlumb.connect({
     source: 'jsonb-diagram__jsonb-iterator-next',
     target: 'jsonb-diagram__jsonb-iterator-token',
     connector: ['Bezier', {curviness: 300}],
     anchor: ['Bottom', 'Right'],
     overlays: [['Arrow', {width: 12, length: 12, location: 0.67}]]
   }, common)
-  jsPlumb.connect({
+  const c3 = jsPlumb.connect({
     source: 'jsonb-diagram__jsonb-iterator-next',
     target: 'jsonb-diagram__jsonb-value',
     connector: ['Straight'],
     anchor: ['Bottom', 'Top'],
     overlays: [['Arrow', {width: 12, length: 12, location: 0.67}]]
   }, common)
+  connections.push(c1, c2, c3)
+}
 
-// end jsonb iterator next
-  jsPlumb.connect({
+function connectJsonbValue2jsonb (Reveal, jsPlumb) {
+  clean(Reveal, jsPlumb)
+  const c1 = jsPlumb.connect({
     source: 'jsonb-diagram__jsonb-value',
     target: 'jsonb-diagram__jsonb',
     connector: ['Bezier'],
@@ -113,9 +182,13 @@ module.exports = function (Reveal, jsPlumb) {
       }
     ]]
   }, common)
+  connections.push(c1)
+}
 
-// pushjsonbValue
-  jsPlumb.connect({
+function pushJsonbValue (Reveal, jsPlumb) {
+  clean(Reveal, jsPlumb)
+
+  const c1 = jsPlumb.connect({
     source: 'jsonb-diagram__jsonb-value',
     target: 'jsonb-diagram__push-jsonb-value',
     connector: ['Bezier', {curviness: 400}],
@@ -123,23 +196,44 @@ module.exports = function (Reveal, jsPlumb) {
     overlays: [['Arrow', {width: 12, length: 12, location: 0.67}]]
   }, common)
 
-  jsPlumb.connect({
+  const c2 = jsPlumb.connect({
     source: 'jsonb-diagram__jsonb-iterator-token',
     target: 'jsonb-diagram__push-jsonb-value',
     connector: ['Straight'],
     anchor: ['Top', 'Bottom'],
     overlays: [['Arrow', {width: 12, length: 12, location: 0.67}]]
   }, common)
-  jsPlumb.connect({
+  const c3 = jsPlumb.connect({
     source: 'jsonb-diagram__push-jsonb-value',
     target: 'jsonb-diagram__jsonb',
     connector: ['Straight'],
     anchor: ['Top', 'Bottom'],
     overlays: [['Arrow', {width: 12, length: 12, location: 0.67}]]
   }, common)
-// end push jsonb value
+  connections.push(c1, c2, c3)
+}
+function drawDiagram (Reveal, jsPlumb) {
+  const mConnections = []
+  clean(Reveal, jsPlumb)
+
+  connectJsonbJsonbIterator(Reveal, jsPlumb)
+  mConnections.push(...connections)
+  // so we avoid cleaning them
+  connections = []
+
+  connectJsonbIteratorNext(Reveal, jsPlumb)
+  mConnections.push(...connections)
+  connections = []
+  connectJsonbValue2jsonb(Reveal, jsPlumb)
+  mConnections.push(...connections)
+  connections = []
+  pushJsonbValue(Reveal, jsPlumb)
+  mConnections.push(...connections)
+  connections = mConnections
+
   Reveal.layout()
 }
+
 },{}],3:[function(require,module,exports){
 /**
  * jsBezier
