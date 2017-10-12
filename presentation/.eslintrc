@@ -1,6 +1,0 @@
-{  "env": {
-  "node": true
-},
-  "globals": {
-  },
-  "extends": ["standard"]}
