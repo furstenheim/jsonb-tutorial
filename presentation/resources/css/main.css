@@ -25,6 +25,14 @@ div .jsonb-diagram__label {
     border-radius: 10px;
 }
 
+#jsonb-diagram__push-jsonb-value {
+    opacity: calc(100*var(--jsonb-diagram__push-jsonb-value, 0));
+}
+
+#jsonb-diagram__jsonb-iterator-next {
+    opacity: calc(100*var(--jsonb-diagram__jsonb-iterator-next, 0));
+}
+
 div .jsonb-diagram__row {
     display: flex;
     justify-content: space-between;
