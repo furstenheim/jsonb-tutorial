@@ -13,9 +13,9 @@ window.hljs = hljs
 Reveal.initialize({
   postMessage: true,
   dependencies: [
-    { src: 'node_modules/reveal.js/plugin/markdown/marked.js' },
-    { src: 'node_modules/reveal.js/plugin/markdown/markdown.js' },
-    { src: 'node_modules/reveal.js/plugin/notes/notes.js', async: true },
+    { src: 'resources/lib/reveal.js/plugin/markdown/marked.js' },
+    { src: 'resources/lib/reveal.js/plugin/markdown/markdown.js' },
+    { src: 'resources/lib/reveal.js/plugin/notes/notes.js', async: true },
     {
       src: 'plugin/highlight/highlight.js',
       async: true,
