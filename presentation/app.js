@@ -38,8 +38,6 @@ Reveal.addEventListener('ready', function () {
   })
 })
 Reveal.addEventListener('ready', function () {
-  Reveal.slide(8)
   jsPlumb.ready(function () {
-    
   })
 })
