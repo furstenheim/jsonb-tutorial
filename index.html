@@ -18,7 +18,8 @@
             <h2>Lessons Learnt Writing PostgreSQL Extensions for JSON(b)</h2>    
             <br>
             <p>Gabriel Fürstenheim</p>
-            <p><i class="fa fa-twitter icon&#45;&#45;white"> </i>&nbsp<i class="fa fa-github icon&#45;&#45;white"></i> furstenheim</p>
+            <p><a href="https://twitter.com/furstenheim" ><i class="fa fa-twitter icon&#45;&#45;white"> </i></a>&nbsp <a
+                    href="https://github.com/furstenheim"><i class="fa fa-github icon&#45;&#45;white"></i></a> furstenheim</p>
         </section>
         
         <section>
@@ -155,6 +156,16 @@
                 <p>Solution</p>
                 <p>????</p>    
             </section>
+            <section>
+                <p>C solution</p>
+                <pre>
+                <code data-trim data-noescape>
+                    jsonb_deep_add(
+                        {"a": {"c": 4}, "b": {"d": 4}},
+                        {"a": {"c": 3}, "b": {"d": 2}}
+                    )
+                </code></pre>
+            </section>
         </section>
         <section>
             <h2>
@@ -263,7 +274,7 @@
                         <code data-trim data-noespace>
                             {
                                 "a"
-                                "1"
+                                1
                                 "b"
                                 {"c": 2}
                             }
@@ -297,7 +308,7 @@
                         <code data-trim data-noespace>
                             {
                                 "a"
-                                "1"
+                                1
                                 "b"
                                     {
                                         "c"
