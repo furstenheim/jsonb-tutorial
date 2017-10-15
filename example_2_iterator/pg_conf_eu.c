@@ -19,9 +19,6 @@ pg_conf_eu(PG_FUNCTION_ARGS)
  Jsonb *jb2 = PG_GETARG_JSONB(1);
  bool isFlatIteration = true;
  
- if (!JB_ROOT_IS_OBJECT(jb1))
-    ereport(ERROR, (errcode(ERRCODE_INVALID_PARAMETER_VALUE), errmsg("Iterator is not an object")));
- 
  it1 = JsonbIteratorInit(&jb1->root);
  r1 = JsonbIteratorNext(&it1, &v1, isFlatIteration);
  

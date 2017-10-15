@@ -18,7 +18,7 @@ pg_conf_eu(PG_FUNCTION_ARGS)
  Jsonb * result;
 
  // result = copyJsonb(jb1);
- result = createStaticJsonb()
+ result = createStaticJsonb();
  PG_RETURN_JSONB(result);
 }
 

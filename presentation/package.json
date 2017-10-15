@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "budo app.js:bundle.js --live --open",
-    "build": "browserify app.js -o bundle.js && node publish.js"
+    "start": "budo app.js:bundle.js --live --open -- -t [ babelify --presets [ minify ] ]",
+    "build": "browserify app.js -o bundle.js -t [ babelify --presets [ minify ] ] && node publish.js"
   },
   "author": "Gabriel Fürstenheim <furstenheim@gmail.com>",
   "license": "ISC",
@@ -16,6 +16,8 @@
     "reveal.js": "git+https://git@github.com/furstenheim/reveal.js.git#470999a3e8f1d54ca2169ee5dcf047d623a05981"
   },
   "devDependencies": {
+    "babel-preset-minify": "^0.2.0",
+    "babelify": "^7.3.0",
     "budo": "^10.0.4",
     "gh-pages": "^1.0.0"
   }
