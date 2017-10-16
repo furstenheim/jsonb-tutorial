@@ -1,7 +1,9 @@
 CREATE EXTENSION pg_conf_eu;
 SELECT pg_conf_eu('{}', '{}');
 INFO:  Iterating
+INFO:  Start object
 INFO:  Iterating
+INFO:  End object
  pg_conf_eu 
 ------------
  
@@ -9,11 +11,17 @@ INFO:  Iterating
 
 SELECT pg_conf_eu('{"a": 1, "c": 2}', '{}');
 INFO:  Iterating
+INFO:  Start object
 INFO:  Iterating
+INFO:  Key
 INFO:  Iterating
+INFO:  Value
 INFO:  Iterating
+INFO:  Key
 INFO:  Iterating
+INFO:  Value
 INFO:  Iterating
+INFO:  End object
  pg_conf_eu 
 ------------
  
@@ -21,9 +29,13 @@ INFO:  Iterating
 
 SELECT pg_conf_eu('{"a": {"b": "p", "d": 5}}', '{}');
 INFO:  Iterating
+INFO:  Start object
 INFO:  Iterating
+INFO:  Key
 INFO:  Iterating
+INFO:  Value
 INFO:  Iterating
+INFO:  End object
  pg_conf_eu 
 ------------
  

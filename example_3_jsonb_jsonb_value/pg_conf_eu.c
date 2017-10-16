@@ -12,7 +12,6 @@ Datum
 pg_conf_eu(PG_FUNCTION_ARGS)
 {
 	Jsonb	   *jb1 = PG_GETARG_JSONB(0);
-	Jsonb	   *jb2 = PG_GETARG_JSONB(1);
 	Jsonb	   *out;
 	JsonbValue *v1;
 

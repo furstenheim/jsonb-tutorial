@@ -16,7 +16,6 @@ pg_conf_eu(PG_FUNCTION_ARGS)
 	JsonbIteratorToken r1;
 	JsonbValue	v1;
 	Jsonb	   *jb1 = PG_GETARG_JSONB(0);
-	Jsonb	   *jb2 = PG_GETARG_JSONB(1);
 	bool		isFlatIteration = true;
 
 	it1 = JsonbIteratorInit(&jb1->root);
@@ -25,6 +24,7 @@ pg_conf_eu(PG_FUNCTION_ARGS)
 	while (r1 != WJB_DONE)
 	{
 		elog(INFO, "Iterating");
+		fmtIteratorToken(r1);
 		r1 = JsonbIteratorNext(&it1, &v1, isFlatIteration);
 	}
 

@@ -14,10 +14,9 @@ Datum
 pg_conf_eu(PG_FUNCTION_ARGS)
 {
 	Jsonb	   *jb1 = PG_GETARG_JSONB(0);
-	Jsonb	   *jb2 = PG_GETARG_JSONB(1);
 	Jsonb	   *result;
 
-	/* result = copyJsonb(jb1); */
+	// result = copyJsonb(jb1);
 	result = createStaticJsonb();
 	PG_RETURN_JSONB(result);
 }
