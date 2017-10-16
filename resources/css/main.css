@@ -46,7 +46,7 @@ div .jsonb-diagram__column {
 }
 div .jsonb-diagram__item {
     background: darkblue;
-    border: 5px solid RoyalBlue;
+    border: 5px solid #93a1a1;
     border-radius: 15px;
 }
 div .jsonb-diagram__item span{
@@ -63,4 +63,8 @@ pre .jsonb_iteration__example__item {
     flex-shrink: 0;
     flex-grow: 1;
     margin: 5px;
+}
+
+.jtk-connector path {
+    stroke-width: 2
 }

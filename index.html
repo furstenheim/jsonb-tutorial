@@ -34,7 +34,7 @@
                     Fullstack backend @Geoblink
                 </li>
                 <li>
-                    Main language is Node.js
+                    Main language is Javascript
                 </li>
             </ul>
         </section>
@@ -361,6 +361,51 @@
                 <li class="fragment">Keys in JSONb are sorted on parsing</li>
                 <li class="fragment">Traverse the JSONs simultaneously</li>
                 <li class="fragment">O(#keys)</li>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <h2>Performance for Summation</h2>
+                <table>
+                    <thead><tr>
+                        <th> Numbers of rows </th><th> Level of nesting </th><th>  C (ms) </th><th> SQL (ms)</th> <th>Improvement</th>
+                    </tr></thead>
+                    <tbody>
+                    <tr>
+                        <th> 2 million       </th><th> 0   </th><th> 3705 </th><th>  11083 </th><th>3x</th>   
+                    </tr>
+                    <tr>
+                        <th>2 million </th><th> 1 </th><th> 12014 </th><th> ?</th><th>?</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Performance for Json Schema Validation</h2>
+                <table>
+                    <thead><tr>
+                        <th> Numbers of tweets </th><th>  C (ms) </th><th> SQL (postgres json schema) (ms)</th> <th>Improvement</th>
+                    </tr></thead>
+                    <tbody>
+                    <tr>
+                        <th> 10000       </th><th> 8911   </th><th> 203172 </th><th>23x</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+        <section>
+            <h2>Key points</h2>
+            <ul>
+                <li>
+                    Easy to extend functionality for JSONb
+                </li>
+                <li>
+                    Keys are stored in order in the database
+                </li>
+                <li>
+                    Recursive sort-merge join
+                </li>
             </ul>
         </section>
 
