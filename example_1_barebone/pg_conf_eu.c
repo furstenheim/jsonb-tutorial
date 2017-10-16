@@ -9,8 +9,7 @@ PG_FUNCTION_INFO_V1(pg_conf_eu);
 Datum
 pg_conf_eu(PG_FUNCTION_ARGS)
 {
- Jsonb *jb1 = PG_GETARG_JSONB(0);
- Jsonb *jb2 = PG_GETARG_JSONB(1);
- 
- PG_RETURN_NULL();
+	Jsonb	   *jb1 = PG_GETARG_JSONB(0);
+
+	PG_RETURN_NULL();
 }
