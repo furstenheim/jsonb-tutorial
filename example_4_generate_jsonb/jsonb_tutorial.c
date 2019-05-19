@@ -9,16 +9,16 @@ static Jsonb *createStaticJsonb();
 static Jsonb *copyJsonb(Jsonb *jb);
 
 
-PG_FUNCTION_INFO_V1(pg_conf_eu);
+PG_FUNCTION_INFO_V1(jsonb_tutorial);
 Datum
-pg_conf_eu(PG_FUNCTION_ARGS)
+jsonb_tutorial(PG_FUNCTION_ARGS)
 {
 	Jsonb	   *jb1 = PG_GETARG_JSONB_P(0);
 	Jsonb	   *result;
 
 	// result = copyJsonb(jb1);
 	result = createStaticJsonb();
-	PG_RETURN_JSONB(result);
+	PG_RETURN_JSONB_P(result);
 }
 
 /*  Returns palloc'd jsonb */

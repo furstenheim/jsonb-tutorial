@@ -1,2 +1,2 @@
-CREATE EXTENSION pg_conf_eu;
-SELECT pg_conf_eu('{}', '{}');
+CREATE EXTENSION jsonb_tutorial;
+SELECT jsonb_tutorial('{}', '{}');

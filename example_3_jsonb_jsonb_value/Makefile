@@ -1,7 +1,7 @@
-EXTENSION = pg_conf_eu
-DATA = pg_conf_eu--0.0.2.sql
+EXTENSION = jsonb_tutorial
+DATA = jsonb_tutorial--0.0.2.sql
 REGRESS	 = main_test
-MODULES = pg_conf_eu
+MODULES = jsonb_tutorial
 
 # postgres stuff
 PG_CONFIG = pg_config

@@ -8,9 +8,9 @@ PG_MODULE_MAGIC;
 void		fmtJsonbValue(JsonbValue v);
 void		fmtIteratorToken(JsonbIteratorToken r);
 
-PG_FUNCTION_INFO_V1(pg_conf_eu);
+PG_FUNCTION_INFO_V1(jsonb_tutorial);
 Datum
-pg_conf_eu(PG_FUNCTION_ARGS)
+jsonb_tutorial(PG_FUNCTION_ARGS)
 {
 	JsonbIterator *it1;
 	JsonbIteratorToken r1;

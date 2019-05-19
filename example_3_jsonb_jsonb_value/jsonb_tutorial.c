@@ -7,9 +7,9 @@ PG_MODULE_MAGIC;
 
 static JsonbValue generate_string_jsonb_value(const char *key);
 
-PG_FUNCTION_INFO_V1(pg_conf_eu);
+PG_FUNCTION_INFO_V1(jsonb_tutorial);
 Datum
-pg_conf_eu(PG_FUNCTION_ARGS)
+jsonb_tutorial(PG_FUNCTION_ARGS)
 {
 	Jsonb	   *jb1 = PG_GETARG_JSONB_P(0);
 	Jsonb	   *out;
@@ -25,7 +25,7 @@ pg_conf_eu(PG_FUNCTION_ARGS)
 		PG_RETURN_NULL();
 	}
 	out = JsonbValueToJsonb(v1);
-	PG_RETURN_JSONB(out);
+	PG_RETURN_JSONB_P(out);
 }
 
 static JsonbValue

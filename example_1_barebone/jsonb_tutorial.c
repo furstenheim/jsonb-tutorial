@@ -5,9 +5,9 @@
 #include "utils/jsonb.h"
 PG_MODULE_MAGIC;
 
-PG_FUNCTION_INFO_V1(pg_conf_eu);
+PG_FUNCTION_INFO_V1(jsonb_tutorial);
 Datum
-pg_conf_eu(PG_FUNCTION_ARGS)
+jsonb_tutorial(PG_FUNCTION_ARGS)
 {
 	Jsonb	   *jb1 = PG_GETARG_JSONB_P(0);
 

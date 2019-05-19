@@ -5,10 +5,10 @@
 #include "utils/jsonb.h"
 PG_MODULE_MAGIC;
 
-PG_FUNCTION_INFO_V1(pg_conf_eu);
+PG_FUNCTION_INFO_V1(jsonb_tutorial);
 /*  Note this code will only work with exactly the same keys */
 Datum
-pg_conf_eu(PG_FUNCTION_ARGS)
+jsonb_tutorial(PG_FUNCTION_ARGS)
 {
 	JsonbIterator *it1,
 			   *it2;
@@ -61,5 +61,5 @@ pg_conf_eu(PG_FUNCTION_ARGS)
 		r2 = JsonbIteratorNext(&it2, &v2, isFlatIteration);
 
 	}
-	PG_RETURN_JSONB(JsonbValueToJsonb(result));
+	PG_RETURN_JSONB_P(JsonbValueToJsonb(result));
 }

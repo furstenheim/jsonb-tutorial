@@ -1,4 +1,4 @@
-CREATE EXTENSION pg_conf_eu;
-SELECT pg_conf_eu('{}', '{}');
-SELECT pg_conf_eu('{"a": 2}', '{}');
-SELECT pg_conf_eu('{"a": {"b": "c"}, "e": 4}', '{}');
+CREATE EXTENSION jsonb_tutorial;
+SELECT jsonb_tutorial('{}', '{}');
+SELECT jsonb_tutorial('{"a": 2}', '{}');
+SELECT jsonb_tutorial('{"a": {"b": "c"}, "e": 4}', '{}');
