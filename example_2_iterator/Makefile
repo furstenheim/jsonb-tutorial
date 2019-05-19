@@ -1,5 +1,5 @@
 EXTENSION = pg_conf_eu
-DATA = pg_conf_eu--0.0.1.sql
+DATA = pg_conf_eu--0.0.2.sql
 REGRESS	 = main_test
 MODULES = pg_conf_eu
 

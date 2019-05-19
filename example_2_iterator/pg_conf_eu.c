@@ -15,7 +15,7 @@ pg_conf_eu(PG_FUNCTION_ARGS)
 	JsonbIterator *it1;
 	JsonbIteratorToken r1;
 	JsonbValue	v1;
-	Jsonb	   *jb1 = PG_GETARG_JSONB(0);
+	Jsonb	   *jb1 = PG_GETARG_JSONB_P(0);
 	bool		isFlatIteration = true;
 
 	it1 = JsonbIteratorInit(&jb1->root);
