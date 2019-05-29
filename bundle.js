@@ -1364,8 +1364,8 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
             }
             return rv;
         })(),
-        DEFAULT_GRID_X = 50,
-        DEFAULT_GRID_Y = 50,
+        DEFAULT_GRID_X = 10,
+        DEFAULT_GRID_Y = 10,
         isIELT9 = iev > -1 && iev < 9,
         isIE9 = iev == 9,
         _pl = function(e) {
@@ -1494,18 +1494,16 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
             useGhostProxy = params.ghostProxy === true ? TRUE : params.ghostProxy && typeof params.ghostProxy === "function" ? params.ghostProxy : FALSE,
             ghostProxy = function(el) { return el.cloneNode(true); };
 
-        var snapThreshold = params.snapThreshold || 5,
-            _snap = function(pos, x, y, thresholdX, thresholdY) {
-                thresholdX = thresholdX || snapThreshold;
-                thresholdY = thresholdY || snapThreshold;
-                var _dx = Math.floor(pos[0] / x),
-                    _dxl = x * _dx,
-                    _dxt = _dxl + x,
+        var snapThreshold = params.snapThreshold,
+            _snap = function(pos, gridX, gridY, thresholdX, thresholdY) {
+                var _dx = Math.floor(pos[0] / gridX),
+                    _dxl = gridX * _dx,
+                    _dxt = _dxl + gridX,
                     _x = Math.abs(pos[0] - _dxl) <= thresholdX ? _dxl : Math.abs(_dxt - pos[0]) <= thresholdX ? _dxt : pos[0];
 
-                var _dy = Math.floor(pos[1] / y),
-                    _dyl = y * _dy,
-                    _dyt = _dyl + y,
+                var _dy = Math.floor(pos[1] / gridY),
+                    _dyl = gridY * _dy,
+                    _dyt = _dyl + gridY,
                     _y = Math.abs(pos[1] - _dyl) <= thresholdY ? _dyl : Math.abs(_dyt - pos[1]) <= thresholdY ? _dyt : pos[1];
 
                 return [ _x, _y];
@@ -1519,7 +1517,10 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
                 return pos;
             }
             else {
-                return _snap(pos, this.params.grid[0], this.params.grid[1]);
+                var tx = this.params.grid ? this.params.grid[0] / 2 : snapThreshold ? snapThreshold : DEFAULT_GRID_X / 2,
+                    ty = this.params.grid ? this.params.grid[1] / 2 : snapThreshold ? snapThreshold : DEFAULT_GRID_Y / 2;
+
+                return _snap(pos, this.params.grid[0], this.params.grid[1], tx, ty);
             }
         };
 
@@ -1527,8 +1528,11 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
             if (dragEl == null) return;
             x = x || (this.params.grid ? this.params.grid[0] : DEFAULT_GRID_X);
             y = y || (this.params.grid ? this.params.grid[1] : DEFAULT_GRID_Y);
-            var p = this.params.getPosition(dragEl);
-            this.params.setPosition(dragEl, _snap(p, x, y, x, y));
+            var p = this.params.getPosition(dragEl),
+                tx = this.params.grid ? this.params.grid[0] / 2 : snapThreshold,
+                ty = this.params.grid ? this.params.grid[1] / 2 : snapThreshold;
+
+            this.params.setPosition(dragEl, _snap(p, x, y, tx, ty));
         };
 
         this.setUseGhostProxy = function(val) {
@@ -1572,7 +1576,7 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
         };
 
         var _assignId = function(obj) {
-                if (typeof obj == "function") {
+                if (typeof obj === "function") {
                     obj._katavorioId = _uuid();
                     return obj._katavorioId;
                 } else {
@@ -1611,7 +1615,7 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
             },
             _addFilter = this.addFilter = _setFilter,
             _removeFilter = this.removeFilter = function(f) {
-                var key = typeof f == "function" ? f._katavorioId : f;
+                var key = typeof f === "function" ? f._katavorioId : f;
                 delete _filters[key];
             };
 
@@ -1793,10 +1797,15 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
             matchingDroppables = k.getMatchingDroppables(this);
             _setDroppablesActive(matchingDroppables, true, false, this);
             this.params.addClass(dragEl, this.params.dragClass || css.drag);
-            //if (this.params.constrain || this.params.containment) {
-            var cs = this.params.getSize(dragEl.parentNode);
-            constrainRect = { w:cs[0], h:cs[1] };
-            //}
+
+            var cs;
+            if (this.params.getConstrainingRectangle) {
+                cs = this.params.getConstrainingRectangle(dragEl)
+            } else {
+                cs = this.params.getSize(dragEl.parentNode);
+            }
+            constrainRect = {w: cs[0], h: cs[1]};
+
             if (andNotify) {
                 k.notifySelectionDragStart(this);
             }
@@ -1804,7 +1813,6 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
         var ghostProxyOffsets;
         this.unmark = function(e, doNotCheckDroppables) {
             _setDroppablesActive(matchingDroppables, false, true, this);
-
 
             if (isConstrained && useGhostProxy(this.el)) {
                 ghostProxyOffsets = [dragEl.offsetLeft, dragEl.offsetTop];
@@ -2439,7 +2447,7 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
 
     };
 
-    root.Katavorio.version = "0.19.2";
+    root.Katavorio.version = "0.19.3";
 
     if (typeof exports !== "undefined") {
         exports.Katavorio = root.Katavorio;
@@ -3519,7 +3527,7 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
 
     var jsPlumbInstance = root.jsPlumbInstance = function (_defaults) {
 
-        this.version = "2.5.1";
+        this.version = "2.5.5";
 
         if (_defaults) {
             jsPlumb.extend(this.Defaults, _defaults);
@@ -7674,6 +7682,9 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
                                 oId = oIdx === 0 ? c.sourceId : c.targetId,
                                 oInfo = _jsPlumb.getCachedData(oId),
                                 oOffset = oInfo.o, oWH = oInfo.s;
+
+                            anchorParams.index = oIdx === 0 ? 1 : 0;
+                            anchorParams.connection = c;
                             anchorParams.txy = [ oOffset.left, oOffset.top ];
                             anchorParams.twh = oWH;
                             anchorParams.tElement = c.endpoints[oIdx];
@@ -7968,10 +7979,9 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
                                 // restore the original scope (issue 57)
                                 _jsPlumb.setDragScope(existingJpcParams[2], existingJpcParams[3]);
                                 jpc.endpoints[idx] = jpc.suspendedEndpoint;
-                                // IF the connection should be reattached, or the other endpoint refuses detach, then
+                                // if the connection should be reattached, or the other endpoint refuses detach, then
                                 // reset the connection to its original state
-                                //if (jpc.isReattach() || jpc._forceReattach || jpc._forceDetach || !jpc.endpoints[idx === 0 ? 1 : 0].detach({connection:jpc, ignoreTarget:false, forceDetach:false, fireEvent:true, originalEvent:originalEvent, endpointBeingDeleted:true})) {
-                                if (jpc.isReattach() || jpc._forceReattach || jpc._forceDetach || !_jsPlumb.deleteConnection(jpc)) {
+                                if (jpc.isReattach() || jpc._forceReattach || jpc._forceDetach || !_jsPlumb.deleteConnection(jpc, {originalEvent: originalEvent})) {
 
                                     jpc.setHover(false);
                                     jpc._forceDetach = null;
@@ -8670,11 +8680,6 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
             this.endpoints[0].setDeleteOnEmpty(params.deleteEndpointsOnEmpty);
             this.endpoints[1].setDeleteOnEmpty(params.deleteEndpointsOnEmpty);
         }
-//        else {
-//            // otherwise, unless the endpoints say otherwise, mark them for deletion.
-//            if (!this.endpoints[0]._doNotDeleteOnDetach) this.endpoints[0]._deleteOnDetach = true;
-//            if (!this.endpoints[1]._doNotDeleteOnDetach) this.endpoints[1]._deleteOnDetach = true;
-//        }
 
 // -------------------------- DEFAULT TYPE ---------------------------------------------
 
@@ -8746,12 +8751,6 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
             this._jsPlumb.reattach = reattach === true;
         };
 
-//        this["delete"] = function() {
-//            this.endpoints[0].detachFromConnection(this);
-//            this.endpoints[1].detachFromConnection(this);
-//            params.deleteConnection(this);
-//        };
-
 // END INITIALISATION CODE
 
 
@@ -8799,6 +8798,16 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
 
     _ju.extend(_jp.Connection, _jp.OverlayCapableJsPlumbUIComponent, {
         applyType: function (t, doNotRepaint, typeMap) {
+
+            var _connector = null;
+            if (t.connector != null) {
+                _connector = this.getCachedTypeItem("connector", typeMap.connector);
+                if (_connector == null) {
+                    _connector = this.prepareConnector(t.connector, typeMap.connector);
+                    this.cacheTypeItem("connector", _connector, typeMap.connector);
+                }
+                this.setPreparedConnector(_connector);
+            }
 
             // none of these things result in the creation of objects so can be ignored.
             if (t.detachable != null) {
@@ -14288,6 +14297,9 @@ module.exports={connectJsonbJsonbIterator,connectJsonbIteratorNext,connectJsonbV
                 bind: e.on,
                 unbind: e.off,
                 getSize: _jp.getSize,
+                getConstrainingRectangle:function(el) {
+                    return [ el.parentNode.scrollWidth, el.parentNode.scrollHeight ];
+                },
                 getPosition: function (el, relativeToRoot) {
                     // if this is a nested draggable then compute the offset against its own offsetParent, otherwise
                     // compute against the Container's origin. see also the getUIPosition method below.
